@@ -23,6 +23,7 @@ public abstract class SmoothMover extends Actor
     public SmoothMover()
     {
         this(new Vector());
+        
     }
     
     /**
@@ -31,6 +32,7 @@ public abstract class SmoothMover extends Actor
     public SmoothMover(Vector velocity)
     {
         this.velocity = velocity;
+        
     }
     
     /**
@@ -54,6 +56,7 @@ public abstract class SmoothMover extends Actor
             exactY = getWorld().getHeight() - 1;
         }
         super.setLocation((int) exactX, (int) exactY);
+        
     }
     
     /**

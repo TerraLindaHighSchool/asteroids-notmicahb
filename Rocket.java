@@ -24,8 +24,8 @@ public class Rocket extends SmoothMover
     public Rocket()
     {
         reloadDelayCount = 5;
+        addToVelocity(new Vector(getRotation(), .7));
     }
-
     /**
      * Do what a rocket's gotta do. (Which is: mostly flying about, and turning,
      * accelerating and shooting when the right keys are pressed.)
@@ -34,19 +34,42 @@ public class Rocket extends SmoothMover
     {
         checkKeys();
         reloadDelayCount++;
-    }
-    
+        move();
+    }    
     /**
      * Check whether there are any key pressed and react to them.
      */
     private void checkKeys() 
     {
-        if (Greenfoot.isKeyDown("space")) 
+         if (Greenfoot.isKeyDown("space")) 
         {
             fire();
         }
+         if (Greenfoot.isKeyDown("left"))
+        {
+            turn(-5);
+        }
+        if (Greenfoot.isKeyDown("right"))
+        {
+            turn(5);
+        }
+        if (Greenfoot.isKeyDown("up"))
+        {
+            move(2);
+        }
+        ignite(Greenfoot.isKeyDown("up"));
     }
-    
+    public void ignite (boolean boosterOn)
+    {
+       if (boosterOn)
+       {
+           setImage(rocketWithThrust);    
+       }
+       else
+       {
+           setImage(rocket);    
+       }
+    }    
     /**
      * Fire a bullet if the gun is ready.
      */
@@ -59,6 +82,5 @@ public class Rocket extends SmoothMover
             bullet.move ();
             reloadDelayCount = 0;
         }
-    }
-    
+    }    
 }
