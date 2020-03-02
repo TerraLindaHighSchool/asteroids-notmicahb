@@ -32,24 +32,33 @@ public class Space extends World
         Explosion.initializeImages();
         ProtonWave.initializeImages();
     }
-     private void paintStars(int count) 
+    
+      private void paintStars(int count)
     {
-        GreenfootImage background = getBackground();
-        for(int i = 0; i < count; i++) 
+    GreenfootImage background = getBackground();
+    for (int i=0; i < count + 1; i++)
         {
-            int x = Greenfoot.getRandomNumber(getWidth());
-            int y = Greenfoot.getRandomNumber(getHeight());
-            int size = Greenfoot.getRandomNumber(5);
-            int a = Greenfoot.getRandomNumber(155);
-            background.setColor(new Color(a + 40, a , a));
-            background.fillOval(x, y, size, size);
-        }
+        int x = Greenfoot.getRandomNumber ( getWidth() );
+        int y = Greenfoot.getRandomNumber ( getHeight() );
+        int color1 = 150 - Greenfoot.getRandomNumber (120);
+        int color2 = color1 - Greenfoot.getRandomNumber (20);
+        int color3 = color1 + Greenfoot.getRandomNumber (20);
+        background.setColorAt(x,y, new Color(color1,color2,color3));
+        int size1 = 3 - Greenfoot.getRandomNumber(2);
+        int size2 = 3 - Greenfoot.getRandomNumber(2);
+        background.fillOval(x, y, size1, size2);
     }
+    }
+
     
 
 GreenfootImage background = getBackground();
 
     /**
+     * Add a given number of asteroids to our world. Asteroids are only added into
+     * the left half of the world.
+     */
+        /**
      * Add a given number of asteroids to our world. Asteroids are only added into
      * the left half of the world.
      */
@@ -60,15 +69,24 @@ GreenfootImage background = getBackground();
             int x = Greenfoot.getRandomNumber(getWidth()/2);
             int y = Greenfoot.getRandomNumber(getHeight()/2);
             addObject(new Asteroid(), x, y);
-        }
+
     }
+    }
+
     
-    /**
+      /**
      * This method is called when the game is over to display the final score.
      */
     public void gameOver() 
     {
-        // TODO: show the score board here. Currently missing.
+        int x=getWidth()/2;
+        int y=getHeight()/2;
+        int currentScore=scoreCounter.getValue();
+        addObject(new ScoreBoard(currentScore),x,y);
+     
     }
-
+    public void updateScore(int addToScore)
+    {
+        scoreCounter.add(addToScore);
+    }
 }
